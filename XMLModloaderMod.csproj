@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3C4CDA74-6FD6-4E6A-8120-3D2A866E47E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>XMLModloaderModV2</RootNamespace>
+    <AssemblyName>XMLModloaderModV2</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Planetbase\Planetbase_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Planetbase\Planetbase_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DeserializerRegistry.cs" />
+    <Compile Include="DeserializableTypeMapper.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\Building.cs" />
+    <Compile Include="Deserializers\Version2\BuildingModuleType.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\Configuration.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\Properties.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\PropertiesSub\AttributeClassName.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\PropertiesSub\AttributeValue.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\PropertiesSub\Decay.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\PropertiesSub\Flags.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ModelSub\GameObjectTags.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\Icon.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\Model.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ModelSub\OBJ.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\BuildingsSub\ConfigurationSub\PropertiesSub\ResourceRequirement.cs" />
+    <Compile Include="Deserializers\Version2\ModSub\Technology.cs" />
+    <Compile Include="Deserializers\Version2\Version2Mod.cs" />
+    <Compile Include="RuntimeObjectBuilder.cs" />
+    <Compile Include="XmlMod.cs" />
+    <Compile Include="XmlModloaderMod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EmbeddedResource Include="assets\schemas\Version2.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Planetbase-Framework\PlanetbaseFramework.csproj">
+      <Project>{74541ff9-9e89-4a95-9c9d-8215bbface26}</Project>
+      <Name>PlanetbaseFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) %25userprofile%25\Documents\Planetbase\Mods</PostBuildEvent>
+  </PropertyGroup>
+</Project>

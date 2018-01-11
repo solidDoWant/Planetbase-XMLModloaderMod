@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SchemaVersion2"
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Mod">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="Technologies" minOccurs="0"/>
+        <xs:element ref="Buildings" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="SchemaVersion" type="xs:string" use="required"/>
+      <xs:attribute name="ModVersion" type="xs:string" use="optional"/>
+      <xs:attribute name="ModName" type="xs:string" use="required"/>
+      <xs:attribute name="InternalName" type="ClassnameType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="ClassnameType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-z]\w*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="Technologies">
+    <xs:complexType>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Technology"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Technology">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="Icon" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="DisplayName" type="xs:string" use="optional"/>
+      <xs:attribute name="ClassName" type="ClassnameType" use="required"/>
+      <xs:attribute name="Cost" type="xs:int" use="required"/>
+      <xs:attribute name="MerchantCategory" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="RawMaterial"/>
+            <xs:enumeration value="Medical"/>
+            <xs:enumeration value="Food"/>
+            <xs:enumeration value="Industrial"/>
+            <xs:enumeration value="Electronics"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Description" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Icon">
+    <xs:complexType>
+      <xs:attribute name="FileName" type="FileNameType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="FileNameType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-z]\w*\.\w{3,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="Buildings">
+    <xs:complexType>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Building"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Building">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="Models" minOccurs="1"/>
+        <xs:element ref="Icon" minOccurs="0"/>
+        <xs:element ref="Configuration" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="DisplayName" type="xs:string" use="optional"/>
+      <xs:attribute name="ClassName" type="ClassnameType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Configuration">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="BaseCost" minOccurs="0"/>
+        <xs:element ref="Properties" minOccurs="0"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="BaseCost">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element ref="ResourceRequirement"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ResourceRequirement">
+    <xs:complexType>
+      <xs:attribute name="Type" type="FullClassName"/>
+      <xs:attribute name="Cost" type="xs:unsignedInt"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Properties">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="Flags" minOccurs="0"/>
+        <xs:element ref="MaxUsers" minOccurs="0"/>
+        <xs:element ref="InfoPanel" minOccurs="0"/>
+        <xs:element ref="Layout" minOccurs="0"/>
+        <xs:element ref="ExtraSizeTech" minOccurs="0"/>
+        <xs:element ref="PowerStorageCapacity" minOccurs="0"/>
+        <xs:element ref="WaterStorageCapacity" minOccurs="0"/>
+        <xs:element ref="PowerGenerationRate" minOccurs="0"/>
+        <xs:element ref="WaterGenerationRate" minOccurs="0"/>
+        <xs:element ref="Exterior" minOccurs="0"/>
+        <xs:element ref="Components" minOccurs="0"/>
+        <xs:element ref="ToolTip" minOccurs="0"/>
+        <xs:element ref="Decay" minOccurs="0"/>
+        <xs:element ref="Prestige" minOccurs="0"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Flags">
+    <xs:complexType>
+      <xs:attribute name="IsLandingPad" type="xs:boolean"/>
+      <xs:attribute name="IsMine" type="xs:boolean"/>
+      <xs:attribute name="IsAirlock" type="xs:boolean"/>
+      <xs:attribute name="IsStorage" type="xs:boolean"/>
+      <xs:attribute name="HasDome" type="xs:boolean"/>
+      <xs:attribute name="HasLightAtNight" type="xs:boolean"/>
+      <xs:attribute name="NeedsWind" type="xs:boolean"/>
+      <xs:attribute name="NeedsLight" type="xs:boolean"/>
+      <xs:attribute name="HasNoFoundations" type="xs:boolean"/>
+      <xs:attribute name="IsDeadEnd" type="xs:boolean"/>
+      <xs:attribute name="IsWalkable" type="xs:boolean"/>
+      <xs:attribute name="HasBlinkingLights" type="xs:boolean"/>
+      <xs:attribute name="ShouldSnapComponents" type="xs:boolean"/>
+      <xs:attribute name="IsStarport" type="xs:boolean"/>
+      <xs:attribute name="ShouldAutoRotate" type="xs:boolean"/>
+      <xs:attribute name="IsAnimated" type="xs:boolean"/>
+      <xs:attribute name="HasCylindricalBase" type="xs:boolean"/>
+      <xs:attribute name="IsRemotelyOperated" type="xs:boolean"/>
+      <xs:attribute name="HasScanAnimation" type="xs:boolean"/>
+      <xs:attribute name="HasPriorityControls" type="xs:boolean"/>
+      <xs:attribute name="HasAntiMeteorLaser" type="xs:boolean"/>
+      <xs:attribute name="HasLightningRod" type="xs:boolean"/>
+      <xs:attribute name="IsDisasterDetector" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Models">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Model" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Model">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="GameObject" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GameObject">
+    <xs:complexType>
+      <xs:attribute name="Tag">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="AnchorPoint"/>
+            <xs:enumeration value="DomeOpaque"/>
+            <xs:enumeration value="DomeTranslucent"/>
+            <xs:enumeration value="DomeStaticTranslucent"/>
+            <xs:enumeration value="DomeStatic"/>
+            <xs:enumeration value="DomeMobile"/>
+            <xs:enumeration value="DomeBase"/>
+            <xs:enumeration value="Untagged"/>
+            <xs:enumeration value="SelectionObject"/>
+            <xs:enumeration value="Sprite"/>
+            <xs:enumeration value="DomeFloor"/>
+            <xs:enumeration value="DomeBase"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Mesh" use="required" type="OBJFile"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="FullClassName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z_]\w*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="OBJFile">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\w+\.(?i)obj"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="MaxUsers">
+    <xs:complexType>
+      <xs:attribute name="Value" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="InfoPanel">
+    <xs:complexType>
+      <xs:attribute name="Value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="LandingPermissions"/>
+            <xs:enumeration value="SecurityControls"/>
+            <xs:enumeration value="ManufacturingLimits"/>
+            <xs:enumeration value="Invalid"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Layout">
+    <xs:complexType>
+      <xs:attribute name="Value">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Circular"/>
+            <xs:enumeration value="Cross"/>
+          </xs:restriction>
+        </xs:simpleType>      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ExtraSizeTech">
+    <xs:complexType>
+      <xs:attribute name="ClassName" use="required" type="FullClassName"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="PowerStorageCapacity">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="WaterStorageCapacity">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="PowerGenerationRate">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="WaterGenerationRate">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Exterior">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Components">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Component" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Component">
+    <xs:complexType>
+      <xs:attribute name="ClassName" use="required" type="FullClassName"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ToolTip">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Decay">
+    <xs:complexType>
+      <xs:attribute name="Time" use="required" type="xs:float"/>
+      <xs:attribute name="RepairResource" use="required" type="FullClassName"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Prestige">
+    <xs:complexType>
+      <xs:attribute name="Value" use="required" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
